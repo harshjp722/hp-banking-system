@@ -1,4 +1,4 @@
-# hp-banking-system
+# HP Banking System
 Banking app for Microservices assessment with docker. This application is in dotnet core 2.2 and uses docker containers on Linux.
 
 ##### Accounts API

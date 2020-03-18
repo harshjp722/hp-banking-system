@@ -1,0 +1,41 @@
+version: '3.4'
+
+services:
+  sql.data:
+    image: microsoft/mssql-server-linux:2017-latest
+
+  accounts.api:
+    image: ${DOCKER_REGISTRY-}accountsapi
+    build:
+      context: .
+      dockerfile: src/Services/Accounts/Accounts.Api/Dockerfile
+    depends_on:
+      - sql.data
+
+  loans.api:
+    image: ${DOCKER_REGISTRY-}loansapi
+    build:
+      context: .
+      dockerfile: src/Services/Loans/Loans.Api/Dockerfile
+    depends_on:
+      - sql.data
+
+
+  identity.api:
+    image: ${DOCKER_REGISTRY-}identityapi
+    build:
+      context: .
+      dockerfile: src/Services/Identity/Identity.Api/Dockerfile
+    depends_on:
+      - sql.data
+
+  ocelotapigateway:
+    image: ${DOCKER_REGISTRY-}ocelotapigateway
+    build:
+      context: .
+      dockerfile: src/ApiGateway/OcelotApiGateway/Dockerfile
+    depends_on:
+      - sql.data
+      - accounts.api
+      - loans.api
+      - identity.api

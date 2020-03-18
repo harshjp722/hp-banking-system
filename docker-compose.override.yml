@@ -1,0 +1,49 @@
+version: '3.4'
+
+services:
+  sql.data:
+    environment:
+      - SA_PASSWORD=Pass@word
+      - ACCEPT_EULA=Y
+    ports:
+      - "7433:1433"   # Important: In a production environment your should remove the external port
+
+  accounts.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://0.0.0.0:80
+      - ConnectionString=${BANK_ACCOUNTS_DB:-Server=sql.data;Database=HpBankingSystem.Services.AccountsDb;User Id=sa;Password=Pass@word}
+    ports:
+      - "7001:80"     # Important: In a production environment your should remove the external port (7001) kept here for microservice debugging purposes. 
+                      # The API Gateway redirects and access through the internal port (80).
+
+  loans.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://0.0.0.0:80
+      - ConnectionString=${BANK_LOANS_DB:-Server=sql.data;Database=HpBankingSystem.Services.LoansDb;User Id=sa;Password=Pass@word}
+    ports:
+      - "7002:80"     # Important: In a production environment your should remove the external port (7002) kept here for microservice debugging purposes. 
+                      # The API Gateway redirects and access through the internal port (80).
+
+
+  identity.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://0.0.0.0:80
+      - ConnectionString=${BANK_LOANS_DB:-Server=sql.data;Database=HpBankingSystem.Services.IdentityDb;User Id=sa;Password=Pass@word}
+    ports:
+      - "7003:80"
+
+  ocelotapigateway:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://0.0.0.0:80
+      - AccountsUrl=http://accounts.api              #Local: You need to open your local dev-machine firewall at range 7000-7200.
+      - IdentityUrl=http://identity.api
+      - LoansUrl=http://loans.api
+    ports:
+      - "7100:80"
+    volumes:
+      - ./src/ApiGateway/configuration:${OCELOTAPIGATEWAY_VOLUME_SPEC:-/app/configuration}
+

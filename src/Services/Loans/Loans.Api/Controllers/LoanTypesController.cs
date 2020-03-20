@@ -13,10 +13,10 @@ namespace Loans.Api.Controllers
     [ApiController]
     public class LoanTypesController : ControllerBase
     {
-        private readonly ILoanTypesService _accountTypesService;
-        public LoanTypesController(ILoanTypesService accountTypesService)
+        private readonly ILoanTypesService _loanTypesService;
+        public LoanTypesController(ILoanTypesService loanTypesService)
         {
-            _accountTypesService = accountTypesService ?? throw new ArgumentNullException(nameof(accountTypesService));
+            _loanTypesService = loanTypesService ?? throw new ArgumentNullException(nameof(loanTypesService));
         }
 
         /// <summary>
@@ -24,12 +24,12 @@ namespace Loans.Api.Controllers
         /// </summary>
         /// <returns>List of Loan Types</returns>
         [HttpGet]
-        [Route("account-types")]
+        [Route("loan-types")]
         public async Task<IActionResult> GetLoanTypes()
         {
             try
             {
-                var response = await _accountTypesService.GetLoanTypes();
+                var response = await _loanTypesService.GetLoanTypes();
                 return Ok(response);
             }
             catch (Exception ex)
@@ -45,12 +45,12 @@ namespace Loans.Api.Controllers
         /// <param name="id">Loan Type Id</param>
         /// <returns>Details of Loan Type</returns>
         [HttpGet]
-        [Route("account-types/{id:int}")]
+        [Route("loan-types/{id:int}")]
         public async Task<IActionResult> GetLoanTypesById(int id)
         {
             try
             {
-                var response = await _accountTypesService.GetLoanTypeById(id);
+                var response = await _loanTypesService.GetLoanTypeById(id);
                 return Ok(response);
             }
             catch (Exception ex)
@@ -63,23 +63,23 @@ namespace Loans.Api.Controllers
         /// <summary>
         /// Add Loan Type Details
         /// </summary>
-        /// <param name="accountTypesRequest">Add Loan Type details</param>
+        /// <param name="loanTypesRequest">Add Loan Type details</param>
         /// <returns>Response of success or failure</returns>
         [HttpPost]
-        [Route("account-types/add")]
-        public async Task<IActionResult> AddLoanTypes([FromBody]LoanTypes accountTypesRequest)
+        [Route("loan-types/add")]
+        public async Task<IActionResult> AddLoanTypes([FromBody]LoanTypes loanTypesRequest)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             try
             {
-                var accountTypes = new LoanTypes
+                var loanTypes = new LoanTypes
                 {
-                    Type = accountTypesRequest.Type,
-                    Description = accountTypesRequest.Description
+                    Type = loanTypesRequest.Type,
+                    Description = loanTypesRequest.Description
                 };
-                var response = await _accountTypesService.AddLoanType(accountTypes);
+                var response = await _loanTypesService.AddLoanType(loanTypes);
                 return Ok(response);
             }
             catch (Exception ex)
@@ -93,21 +93,21 @@ namespace Loans.Api.Controllers
         /// <summary>
         /// Update Loan Type Details
         /// </summary>
-        /// <param name="accountTypesRequest">Update Loan Type Details</param>
+        /// <param name="loanTypesRequest">Update Loan Type Details</param>
         /// <returns>Response of success or failure</returns>
         [HttpPut]
-        [Route("account-types/edit")]
-        public async Task<IActionResult> UpdateLoanTypes([FromBody]LoanTypes accountTypesRequest)
+        [Route("loan-types/edit")]
+        public async Task<IActionResult> UpdateLoanTypes([FromBody]LoanTypes loanTypesRequest)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             try
             {
-                var accountTypes = await _accountTypesService.GetLoanTypeById(accountTypesRequest.Id);
-                accountTypes.Type = accountTypesRequest.Type;
-                accountTypes.Description = accountTypesRequest.Description;
-                var response = await _accountTypesService.UpdateLoanTypes(accountTypes);
+                var loanTypes = await _loanTypesService.GetLoanTypeById(loanTypesRequest.Id);
+                loanTypes.Type = loanTypesRequest.Type;
+                loanTypes.Description = loanTypesRequest.Description;
+                var response = await _loanTypesService.UpdateLoanTypes(loanTypes);
                 return Ok(response);
             }
             catch (Exception ex)

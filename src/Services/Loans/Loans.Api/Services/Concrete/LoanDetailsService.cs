@@ -27,11 +27,11 @@ namespace Loans.Api.Services.Concrete
             return await _context.LoanDetail.Include(i => i.LoanTypes).FirstOrDefaultAsync(f => f.Id == id);
         }
 
-        public async Task<bool> AddLoanDetails(LoanDetails accountDetails)
+        public async Task<bool> AddLoanDetails(LoanDetails loanDetails)
         {
             try
             {
-                _context.LoanDetail.Add(accountDetails);
+                _context.LoanDetail.Add(loanDetails);
                 await _context.SaveChangesAsync();
                 return true;
             }
@@ -42,11 +42,11 @@ namespace Loans.Api.Services.Concrete
            
         }
 
-        public async Task<bool> UpdateLoanDetails(LoanDetails accountDetails)
+        public async Task<bool> UpdateLoanDetails(LoanDetails loanDetails)
         {
             try
             {
-                _context.LoanDetail.Update(accountDetails);
+                _context.LoanDetail.Update(loanDetails);
                 await _context.SaveChangesAsync();
                 return true;
             }

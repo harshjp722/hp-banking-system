@@ -10,8 +10,8 @@ namespace Loans.Api.Services.Abstract
 
         Task<LoanDetails> GetLoanDetailsById(int id);
 
-        Task<bool> AddLoanDetails(LoanDetails accountDetails);
+        Task<bool> AddLoanDetails(LoanDetails loanDetails);
 
-        Task<bool> UpdateLoanDetails(LoanDetails accountDetails);
+        Task<bool> UpdateLoanDetails(LoanDetails loanDetails);
     }
 }

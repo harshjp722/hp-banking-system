@@ -7,7 +7,7 @@ WORKDIR /src
 COPY src/ApiGateway/OcelotApiGateway/OcelotApiGateway.csproj src/ApiGateway/OcelotApiGateway/
 RUN dotnet restore src/ApiGateway/OcelotApiGateway/OcelotApiGateway.csproj
 COPY . .
-WORKDIR /src/src/ApiGateway/OcelotApiGateway
+WORKDIR /src/ApiGateway/OcelotApiGateway
 RUN dotnet build OcelotApiGateway.csproj -c Release -o /app
 
 FROM build AS publish

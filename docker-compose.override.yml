@@ -2,6 +2,8 @@ version: '3.4'
 
 services:
   sql.data:
+    volumes:
+      - ./data/mssql:${SQLDATA_VOLUME_SPEC:-/var/opt/mssql/data}
     environment:
       - SA_PASSWORD=Pass@word
       - ACCEPT_EULA=Y
@@ -25,7 +27,6 @@ services:
     ports:
       - "7002:80"     # Important: In a production environment your should remove the external port (7002) kept here for microservice debugging purposes. 
                       # The API Gateway redirects and access through the internal port (80).
-
 
   identity.api:
     environment:

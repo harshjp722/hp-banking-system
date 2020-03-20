@@ -2,22 +2,22 @@
 Banking app for Microservices assessment with docker. This application is in dotnet core 2.2 and uses docker containers on Linux.
 
 ##### Accounts API
-To check Accounts API [click here!](http://localhost:7001/swagger)
+To check Accounts API [click here!](http://localhost:7001/swagger){:target="_blank"}
 
 ##### Loans API
-To check Loans API [click here!](http://localhost:7002/swagger)
+To check Loans API [click here!](http://localhost:7002/swagger){:target="_blank"}
 
 ##### Identity API
-To check Identity API [click here!](http://localhost:7003/swagger)
+To check Identity API [click here!](http://localhost:7003/swagger){:target="_blank"}
 
 ##### API Gateway
 To check API gateway configure URLs as follows,
 > http://localhost:7100/api/v1/ + (accounts or loans or identity) + /{Everything after v1/ in Swagger}
 
 __For Example:__
-* [Accounts API](http://localhost:7100/api/v1/accounts/values)
-* [Loans API](http://localhost:7100/api/v1/loans/values)
-* [Identity API](http://localhost:7100/api/v1/identity/values)
+* [Accounts API](http://localhost:7100/api/v1/accounts/values){:target="_blank"}
+* [Loans API](http://localhost:7100/api/v1/loans/values){:target="_blank"}
+* [Identity API](http://localhost:7100/api/v1/identity/values){:target="_blank"}
 
 ### Architecture Diagram
 ![Image of Yaktocat](https://raw.githubusercontent.com/harshjp722/hp-banking-system/master/Docs/Microservices.png)

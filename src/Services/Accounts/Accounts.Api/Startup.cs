@@ -75,8 +75,8 @@ namespace Accounts.Api
                 options.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "HpBankingSystem - Accounts HTTP API",
-                    Description = "The Accounts Microservice HTTP API. This is a Data-Driven/CRUD microservice sample"
+                    Title = "HpBankingSystem - Accounts API",
+                    Description = "The Accounts Microservice API. This is a Data-Driven/CRUD microservice sample"
                 });
             });
         }

@@ -13,10 +13,10 @@ namespace Loans.Api.Controllers
     [ApiController]
     public class LoanDetailsController : ControllerBase
     {
-        private readonly ILoanDetailsService _accountDetailsService;
-        public LoanDetailsController(ILoanDetailsService accountDetailsService)
+        private readonly ILoanDetailsService _loanDetailsService;
+        public LoanDetailsController(ILoanDetailsService loanDetailsService)
         {
-            _accountDetailsService = accountDetailsService ?? throw new ArgumentNullException(nameof(accountDetailsService));
+            _loanDetailsService = loanDetailsService ?? throw new ArgumentNullException(nameof(loanDetailsService));
         }
 
         /// <summary>
@@ -24,12 +24,12 @@ namespace Loans.Api.Controllers
         /// </summary>
         /// <returns>List of Loans</returns>
         [HttpGet]
-        [Route("account-details")]
+        [Route("loan-details")]
         public async Task<IActionResult> GetLoanDetails()
         {
             try
             {
-                var response = await _accountDetailsService.GetLoanDetails();
+                var response = await _loanDetailsService.GetLoanDetails();
                 return Ok(response);
             }
             catch (Exception ex)
@@ -45,12 +45,12 @@ namespace Loans.Api.Controllers
         /// <param name="id">Loan Id</param>
         /// <returns>Details of Loan</returns>
         [HttpGet]
-        [Route("account-details/{id:int}")]
+        [Route("loan-details/{id:int}")]
         public async Task<IActionResult> GetLoanDetailsById(int id)
         {
             try
             {
-                var response = await _accountDetailsService.GetLoanDetailsById(id);
+                var response = await _loanDetailsService.GetLoanDetailsById(id);
                 return Ok(response);
             }
             catch (Exception ex)
@@ -63,26 +63,26 @@ namespace Loans.Api.Controllers
         /// <summary>
         /// Add Loan Details
         /// </summary>
-        /// <param name="accountDetailsRequest">Add Loan details</param>
+        /// <param name="loanDetailsRequest">Add Loan details</param>
         /// <returns>Response of success or failure</returns>
         [HttpPost]
-        [Route("account-details/add")]
-        public async Task<IActionResult> AddLoanDetails([FromBody]LoanDetails accountDetailsRequest)
+        [Route("loan-details/add")]
+        public async Task<IActionResult> AddLoanDetails([FromBody]LoanDetails loanDetailsRequest)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             try
             {
-                var accountDetails = new LoanDetails
+                var loanDetails = new LoanDetails
                 {
-                    LoanTypeId = accountDetailsRequest.LoanTypeId,
-                    LoanHolder = accountDetailsRequest.LoanHolder,
-                    LoanBranch = accountDetailsRequest.LoanBranch,
-                    LoanAmount = accountDetailsRequest.LoanAmount,
-                    StartDate = accountDetailsRequest.StartDate
+                    LoanTypeId = loanDetailsRequest.LoanTypeId,
+                    LoanHolder = loanDetailsRequest.LoanHolder,
+                    LoanBranch = loanDetailsRequest.LoanBranch,
+                    LoanAmount = loanDetailsRequest.LoanAmount,
+                    StartDate = loanDetailsRequest.StartDate
                 };
-                var response = await _accountDetailsService.AddLoanDetails(accountDetails);
+                var response = await _loanDetailsService.AddLoanDetails(loanDetails);
                 return Ok(response);
             }
             catch (Exception ex)
@@ -96,24 +96,24 @@ namespace Loans.Api.Controllers
         /// <summary>
         /// Update Loan Details
         /// </summary>
-        /// <param name="accountDetailsRequest">Update Loan Details</param>
+        /// <param name="loanDetailsRequest">Update Loan Details</param>
         /// <returns>Response of success or failure</returns>
         [HttpPut]
-        [Route("account-details/edit")]
-        public async Task<IActionResult> UpdateLoanDetails([FromBody]LoanDetails accountDetailsRequest)
+        [Route("loan-details/edit")]
+        public async Task<IActionResult> UpdateLoanDetails([FromBody]LoanDetails loanDetailsRequest)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             try
             {
-                var accountDetails = await _accountDetailsService.GetLoanDetailsById(accountDetailsRequest.Id);
-                accountDetails.LoanHolder = accountDetailsRequest.LoanHolder;
-                accountDetails.LoanBranch = accountDetailsRequest.LoanBranch;
-                accountDetails.LoanAmount = accountDetailsRequest.LoanAmount;
-                accountDetails.StartDate = accountDetailsRequest.StartDate;
-                accountDetails.IsActive = accountDetailsRequest.IsActive;
-                var response = await _accountDetailsService.UpdateLoanDetails(accountDetails);
+                var loanDetails = await _loanDetailsService.GetLoanDetailsById(loanDetailsRequest.Id);
+                loanDetails.LoanHolder = loanDetailsRequest.LoanHolder;
+                loanDetails.LoanBranch = loanDetailsRequest.LoanBranch;
+                loanDetails.LoanAmount = loanDetailsRequest.LoanAmount;
+                loanDetails.StartDate = loanDetailsRequest.StartDate;
+                loanDetails.IsActive = loanDetailsRequest.IsActive;
+                var response = await _loanDetailsService.UpdateLoanDetails(loanDetails);
                 return Ok(response);
             }
             catch (Exception ex)

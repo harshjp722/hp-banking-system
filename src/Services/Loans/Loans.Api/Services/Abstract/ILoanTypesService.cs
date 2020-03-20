@@ -12,8 +12,8 @@ namespace Loans.Api.Services.Abstract
 
         Task<LoanTypes> GetLoanTypeById(int id);
 
-        Task<bool> AddLoanType(LoanTypes accountTypes);
+        Task<bool> AddLoanType(LoanTypes loanTypes);
 
-        Task<bool> UpdateLoanTypes(LoanTypes accountTypes);
+        Task<bool> UpdateLoanTypes(LoanTypes loanTypes);
     }
 }

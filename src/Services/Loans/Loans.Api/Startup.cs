@@ -62,8 +62,8 @@ namespace Loans.Api
                 options.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "HpBankingSystem - Loans HTTP API",
-                    Description = "The Loans Microservice HTTP API. This is a Data-Driven/CRUD microservice sample"
+                    Title = "HpBankingSystem - Loans API",
+                    Description = "The Loans Microservice API. This is a Data-Driven/CRUD microservice sample"
                 });
             });
         }

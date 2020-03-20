@@ -14,6 +14,11 @@ To check Identity API [click here!](http://localhost:7003/swagger)
 To check API gateway configure URLs as follows,
 > http://localhost:7100/api/v1/ + (accounts or loans or identity) + /{Everything after v1/ in Swagger}
 
+__For Example:__
+Accounts API - http://localhost:7100/api/v1/accounts/values
+Loans API - http://localhost:7100/api/v1/loans/values
+Identity API - http://localhost:7100/api/v1/identity/values
+
 ### Architecture Diagram
 ![Image of Yaktocat](https://raw.githubusercontent.com/harshjp722/hp-banking-system/master/Docs/Microservices.png)
 
